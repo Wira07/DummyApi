@@ -1,8 +1,11 @@
 package com.example.dummyapi.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.animation.Animation
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         // Animations
         topAnim = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.top_animation)
         bottomAnim = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.bottom_animation)
@@ -48,6 +50,39 @@ class MainActivity : AppCompatActivity() {
             getData()
         }
         getData()
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_home -> {
+                // Tambahkan logika untuk menangani klik menu "Home"
+                Toast.makeText(this, "Menu Home Clicked", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            R.id.menu_about -> {
+                // Tambahkan logika untuk menangani klik menu "About"
+                openAboutPage()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openAboutPage() {
+        // Tambahkan logika untuk membuka halaman "About"
+        Toast.makeText(this, "Menu About Clicked", Toast.LENGTH_SHORT).show()
+        // Misalnya, bisa berupa intent untuk membuka aktivitas AboutActivity
+         val intent = Intent(this, AboutActivity::class.java)
+         startActivity(intent)
     }
 
     private fun productOnClick(product: Product) {
